@@ -1,0 +1,50 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Text App</title>
+</head>
+
+<body>
+
+<h1>Store Text</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">
+        Save
+    </button>
+</form>
+
+<hr>
+
+<h2>Messages</h2>
+
+<ul>
+
+{% for message in messages %}
+
+<li>
+
+<strong>{{ message.created_at }}</strong>
+
+<br>
+
+{{ message.text }}
+
+</li>
+
+{% empty %}
+
+<li>No messages yet.</li>
+
+{% endfor %}
+
+</ul>
+
+</body>
+
+</html>

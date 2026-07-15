@@ -1,0 +1,9 @@
+---
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: k3s-airgap
+servers: 1
+agents: 0
+image: k3s:v1.36.2
+network: k3d

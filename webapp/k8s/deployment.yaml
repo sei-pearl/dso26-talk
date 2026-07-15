@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-text-app
+  namespace: webapp
+  labels:
+    app.kubernetes.io/name: django-text-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: django-text-app
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: django-text-app
+    spec:
+      imagePullSecrets:
+        - name: private-registry
+      containers:
+        - name: django
+          image: ssddi-docker.artifacts.sei.cmu.edu/dsodays26/app:1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: SECRET_KEY
+              value: "Pleaseneveractuallyusethissecretkeythanks"
+            - name: DEBUG
+              value: "False"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: webapp-cluster-app
+                  key: uri
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi

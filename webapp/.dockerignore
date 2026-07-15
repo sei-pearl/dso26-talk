@@ -1,0 +1,5 @@
+.venv/
+k8s/
+Dockerfile
+example-env
+README.md
