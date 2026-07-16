@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-svc
+  namespace: webapp
+  labels:
+    # Enables "zarf connect webapp"
+    zarf.dev/connect-name: webapp
+  annotations:
+    zarf.dev/connect-description: "webapp"
+    # Sets a URL-suffix to automatically navigate to in the browser
+    zarf.dev/connect-url: "/"
+spec:
+  selector:
+    app.kubernetes.io/name: django-text-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080

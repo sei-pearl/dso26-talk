@@ -5,5 +5,11 @@ metadata:
   name: k3s-airgap
 servers: 1
 agents: 0
-image: k3s:v1.36.2
-network: k3d
+image: k3s:airgap
+network: k3d-airgap
+registries:
+  config: |
+    mirrors:
+      "hauler.internal":
+        endpoint:
+          - http://k3d-jumpbox:5000

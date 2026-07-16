@@ -1,0 +1,7 @@
+nameOverride: "webapp"
+# See Zarf Issue about CNPG: https://github.com/zarf-dev/zarf/issues/3594
+cluster:
+  instances: 1
+  imageName: ###ZARF_REGISTRY###/cloudnative-pg/postgresql:16
+  storage:
+    size: 1Gi

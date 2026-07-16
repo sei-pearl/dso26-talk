@@ -1,0 +1,9 @@
+apiVersion: content.hauler.cattle.io/v1
+kind: Images
+metadata:
+  name: hauler-content-cloudnative-pg
+spec:
+  images:
+    - name: ghcr.io/cloudnative-pg/cloudnative-pg:1.30.0-ubi9
+    - name: ghcr.io/cloudnative-pg/postgresql:16
+    - name: ghcr.io/cloudnative-pg/postgresql:17

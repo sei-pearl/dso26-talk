@@ -1,0 +1,36 @@
+kind: ZarfPackageConfig
+metadata:
+  name: 'webapp'
+  description: 'webapp'
+components:
+  - name: webapp-cluster
+    required: true
+    description: Deploy a CNPG Cluster for the web application
+    charts:
+      - name: cluster
+        url: oci://ghcr.io/cloudnative-pg/charts/cluster
+        version: 0.8.0
+        namespace: webapp
+        valuesFiles:
+          - cluster.yaml
+    actions:
+      onDeploy:
+        after:
+          - description: Wait for CNPG Cluster to start
+            maxTotalSeconds: 60
+            wait:
+              cluster:
+                kind: cluster.postgresql.cnpg.io
+                name: cluster-webapp
+                namespace: webapp
+                condition: Ready
+  - name: webapp
+    required: true
+    description: "Deploy the web application"
+    manifests:
+      - name: webapp
+        files:
+          - ./manifests/
+        namespace: webapp
+    images:
+      - ghcr.io/sei-pearl/dso26-talk/webapp:1

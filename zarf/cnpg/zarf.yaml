@@ -1,0 +1,19 @@
+kind: ZarfPackageConfig
+metadata:
+  name: 'cloudnative-pg'
+  description: 'Cloudnative-PG Zarf Package'
+
+components:
+  - name: cloudnative-charts
+    required: true
+    charts:
+      - name: cloudnative-pg-chart
+        url: oci://ghcr.io/cloudnative-pg/charts/cloudnative-pg
+        version: 0.29.0
+        namespace: cnpg-system
+        valuesFiles:
+          - cnpg.yaml
+    images:
+      - ghcr.io/cloudnative-pg/cloudnative-pg:1.30.0-ubi9
+      - ghcr.io/cloudnative-pg/postgresql:16
+      - ghcr.io/cloudnative-pg/postgresql:17
