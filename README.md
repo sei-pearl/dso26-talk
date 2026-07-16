@@ -1,4 +1,4 @@
-# Tooling in Air-Gapped K8s: An Overview of Solutions - DevSecOps Days 26
+# Tooling for Air-Gapped K8s: An Overview of Solutions - DevSecOps Days 26
 
 This repository contains supplemental material relating to the presentation.
 
